@@ -1,0 +1,356 @@
+FORMAT: 1A
+HOST: http://service.tapioca.cbs.kz/api/v2
+
+# API документация
+Документация по заявкам.
+
+# Group Tickets
+Tickets - основная сущность микросервиса.
+В коде объект именуется как `ticket`, в базе данных соответствует таблице `orders`.
+
+# tickets [/tickets{?fields,filters,sort,limit}]
+Параметры передаются в JSON формате.
+
+#### Ограничение атрибутов
+Можно ограничить перечень атрибутов, для этого нужно перечислить нужные атрибуты в масиве параметра `fields`.
+
+#### Также можно указать справочники:
+    - `status`
+    - `performer`
+    - `city`
+    - `equipment`
+    - `customer`
+    - `customerPerson`
+    - `serviceType`
+    - `vendor`
+    - `seller`
+    - `sellerPerson`
+    - `contract`
+    - `equipsupplier`
+    - `reason`
+
+### Cписок заявок [GET]
+
++ Parameters
+
+    + fields: {"ticket":[]} (required, json) - Перечень атрибутов заявки, пустой массив включает все атрибуты
+    + filters: {"ticket":{"status":7}} (optional, json) - Фильтры выборки записей
+    + sort: {"ticket":{"date":"desc"}} (optional, json) - Сортировка записей
+    + limit: [10,5] (optional, array) - Ограничение (количество строк, сдвиг)
+
++ Response 200 (application/json)
+        [
+            {
+                "id": 358900
+                "archivedFlag": 1
+                "billDate": "2013-02-06T00:00:00.000Z"
+                "billNumber": ""
+                "blockNumber": null
+                "cbsWarrantyFlag": 0
+                "checkedFlag": null
+                "cityId": 1
+                "commonFieldString": null
+                "contractId": 1
+                "customerId": 1
+                "customerPersonId": 1
+                "date": "2016-10-24T00:00:00.000Z"
+                "description": "ExpressBus Communications problem"
+                "detailsHash": "41787765"
+                "diagPrice": ""
+                "equipmentId": 5701
+                "equipSupplierId": null
+                "failDescription": null
+                "frozenFlag": 0
+                "hash": "37586291"
+                "invoiceDate": null
+                "number": "D42696M-16"
+                "numberFromCustomer": ""
+                "onceFlag": null
+                "ownerId": 161
+                "paidFlag": 0
+                "parentId": 0
+                "partName": null
+                "partNumber": null
+                "performerId": 131
+                "reasonDescription": null
+                "reasonId": null
+                "repairPrice": ""
+                "retryFlag": 0
+                "sellerId": 0
+                "sellerPersonId": 0
+                "serialNumber": null
+                "serviceTypeId": 1
+                "statusId": 3
+                "subcontractorFlag": 0
+                "typeId": 1
+                "vendorId": 1
+                "warrantyFlag": 0
+                "perm": {
+                    "serviceType": 1
+                    "comment": 1
+                    "status": 1
+                    "partOrder": {
+                        "needPart": {
+                            "addition": 1
+                        }
+                        "generalPart": {
+                            "addition": 0
+                            "editing": 0
+                        }
+                    }
+                    "instPart": {
+                        "addition": 1
+                    }
+                }
+            }
+        ]
+
+
+# tickets/mine [/tickets/mine]
+
+## Список заявок пользователя [GET]
+
++ Response 200 (application/json)
+    [
+      {
+        "id": 358960
+        "date": "2016-10-24T00:00:00.000Z"
+        "description": "диспенсер выезд с комиссией"
+        "number": "D42744M-16"
+        "serviceTypeId": 1
+        "statusId": 3
+        "typeId": 1
+        "vendorId": 1
+        "status": {
+          "name": "Назначен исполнитель"
+        }
+        "equipment": {
+          "endCBSWarrantyDate": null
+          "endWarrantyDate": null
+          "location": "г.Астана ул. Орынбор 8 4 подъезд Дом Министерств"
+          "regNumber": "693"
+          "equipmentType": {
+            "model": "520"
+            "name": "Opteva 520"
+          }
+        }
+        "customer": {
+          "name": "КазКоммерцБанк"
+        }
+        "serviceType": {
+          "name": "Оперативное обслуживание"
+        }
+        "perm": {
+          "comment": 1
+          "serviceType": 1
+          "status": 1
+          "partOrder": {
+            "needPart": {
+              "addition": 1
+            }
+            "generalPart": {
+              "addition": 0
+              "editing": 0
+            }
+          }
+          "instPart": {
+            "addition": 1
+          }
+        }
+      }
+    ]
+
+
+# tickets/:id [/tickets/{id}]
+Выдача одной заявки по идентификатору.
+
+## Чтение одной заявки [GET]
+
++ Parameters
+    + id: 2354 (required, number) - Id ticket
+
++ Response 200 (application/json)
+  {
+    "id": 2354
+    "archivedFlag": 1
+    "billDate": "2009-06-18T00:00:00.000Z"
+    "billNumber": ""
+    "blockNumber": null
+    "cbsWarrantyFlag": 1
+    "checkedFlag": 0
+    "commonFieldString": null
+    "date": "2009-06-04T00:00:00.000Z"
+    "description": ""
+    "detailsHash": null
+    "diagPrice": null
+    "failDescription": null
+    "frozenFlag": 0
+    "hash": null
+    "invoiceDate": null
+    "number": "D5053MW-09"
+    "numberFromCustomer": ""
+    "onceFlag": null
+    "ownerId": 6
+    "paidFlag": 0
+    "parentId": 0
+    "partName": null
+    "partNumber": null
+    "reasonDescription": null
+    "repairPrice": null
+    "retryFlag": 0
+    "serialNumber": null
+    "subcontractorFlag": 0
+    "warrantyFlag": 1
+    "status": {
+      "id": 7
+      "name": "Закрыта"
+      "next": []
+    }
+    "performer": {
+      "id": 45
+      "blocked": false
+      "city_id": 1
+      "cityId": 1
+      "departmentid": 1
+      "departmentId": 1
+      "deputyId": null
+      "email": "PGrafinin@cbs.kz"
+      "hash": "1f64b4bf70f0e7a49961ae00b1ee173ffba17f0c"
+      "login": "PGrafinin"
+      "name": "Павел Графинин"
+      "password": "54321"
+    }
+    "city": {
+      "id": 1
+      "code": "almaty"
+      "name": "Алматы"
+    }
+    "equipment": {
+      "id": 2321
+      "archivedFlag": 0
+      "bnaFlag": 0
+      "cityId": 1
+      "contractId": 1
+      "customerId": 1
+      "endCBSWarrantyDate": "2009-06-18T00:00:00.000Z"
+      "endWarrantyDate": "2009-06-18T00:00:00.000Z"
+      "location": "Головной банк Казкомммерцбанка ул. Жандосова 25"
+      "regNumber": "107"
+      "serialNumber": "1750F3320094"
+      "service_contract_id": 1
+      "typeId": 3
+      "typemodelid": 3
+      "updateTime": "2015-02-09T12:01:44.000Z"
+    }
+    "customer": {
+      "id": 1
+      "active": 1
+      "address": "г.Алматы ул Гагарина 135Ж"
+      "bank": ""
+      "bik": "1312213"
+      "cityId": null
+      "name": "КазКоммерцБанк"
+      "rnn": "600700323567"
+      "rs": "2342333"
+      "sellerFlag": "0"
+      "typeId": 1
+      "userId": null
+    }
+    "customerPerson": {
+      "id": 1
+      "address": "Гагарина 135Ж"
+      "cardDate": null
+      "cardNumber": null
+      "cityId": 1
+      "customerId": 1
+      "dispatch": 1
+      "email": "sarkhipov@kkb.kz"
+      "iin": null
+      "name": "Архипов Степан"
+      "phone": "2585137"
+      "post": ""
+    }
+    "serviceType": {
+      "id": 6
+      "name": "Инсталляция"
+    }
+    "vendor": {
+      "id": 1
+      "appendix": "D"
+      "innerFlag": 0
+      "name": "Diebold"
+    }
+    "seller": null
+    "sellerPerson": null
+    "contract": {
+      "id": 1
+      "customerid": 1
+      "customerId": 1
+      "endDate": "2017-12-31T00:00:00.000Z"
+      "name": "10 CBS-C  "
+      "startDate": "2006-12-29T00:00:00.000Z"
+      "typeId": null
+    }
+    "reason": null
+    "perm": {
+      "serviceType": 0
+      "comment": 0
+      "status": 0
+      "partOrder": {
+        "needPart": {
+          "addition": 0
+        }
+        "generalPart": {
+          "addition": 0
+          "editing": 0
+        }
+      }
+      "instPart": {
+        "addition": 0
+      }
+    }
+  }
+
+
+# tickets/base/:id [/tickets/base/{id}]
+
+## Чтение основных полей [GET]
+
++ Parameters
+    + id: 2354 (required, number) - Id ticket
+
++ Response 200 (application/json)
+    {
+      "number": "W10392M-16"
+      "serviceTypeId": 1
+      "statusId": 22
+      "typeId": 1
+      "vendorId": 7
+      "perm": {
+        "serviceType": 1
+        "comment": 1
+        "status": 1
+        "partOrder": {
+          "needPart": {
+            "addition": 1
+          }
+          "generalPart": {
+            "addition": 0
+            "editing": 0
+          }
+        }
+        "instPart": {
+          "addition": 1
+        }
+      }
+    }
+
+# tickets/status [/tickets/status]
+
+## Изменение статуса [PUT]
+
++ Parameters
+    + ticketId: 2354 (required, number) - Id ticket
+    + statusId: 7 (required, number) - Id status
+
++ Response 204 (application/json)

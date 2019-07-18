@@ -1,0 +1,189 @@
+FORMAT: 1A
+HOST: http://service.tapioca.cbs.kz
+
+# API документация
+Документация по запасным частям.
+
+# Group Parts
+Программный интерфейс для запасных частей.
+
+# Parts [/api/v2/parts/general/{ticketId}]
+
+###  Список запасных частей [GET]
+
++ Parameters
+    + ticketId: (required, number) - Id заявки
+
++ Response 200 (application/json)
+    + Attributes (array[PartGeneral])
+
+# Group Parts Need
+Программный интерфейс для требуемых запасных частей.
+
+# Parts [/api/v2/parts/need/{ticketId}]
+
+###  Список запасных частей [GET]
+
++ Parameters
+    + ticketId: (required, number) - Id заявки
+
++ Response 200 (application/json)
+    + Attributes (array[PartNeed])
+
+###  Создание запасных частей [POST]
+Создание запроса на требуемые запасные части.
+
++ Parameters
+    + ticketId: (required, number) - Id заявки
+
+###  Изманение статуса [PUT]
+Изменение статуса затребованной запасной части.
+
++ Parameters
+    + partId: (required, number) - Id запчасти
+    + statusId: (required, number) - Id статуса
+
+# Group Parts Installed
+Программный интерфейс для установленных запасных частей.
+
+# Parts [/api/v2/parts/installed/{ticketId}]
+
+###  Список установленных запасных частей [GET]
+
++ Parameters
+    + ticketId: (required, number) - Id заявки
+
++ Response 200 (application/json)
+    + Attributes (array[PartsInstalled])
+
+# Group Parts Devices
+Справочник.
+
+# Parts [/api/v2/parts/devices/{vendorId}]
+
+###  Справочник запасных частей [GET]
+
++ Parameters
+    + vendorId: (required, number) - Id вендора
+
++ Response 200 (application/json)
+    + Attributes (array[Device])
+
+# Group Parts Units
+Справочник.
+
+# Parts [/api/v2/parts/devices/{deviceId}]
+
+###  Справочник модулей [GET]
+
++ Parameters
+    + deviceId: (required, number) - Id запчасти
+
++ Response 200 (application/json)
+    + Attributes (array[Device])
+
+# Group Parts Assigned To Me
+Список закрепленных запасных частей.
+
+# Parts [/api/v2/parts/assigned-to/me]
+
+###  Закрепленные на текущего пользователя [GET]
+
++ Response 200 (application/json)
+    + Attributes (array[AssignedPart])
+
+# Group Parts Assigned To Manager
+Список закрепленных запасных частей.
+
+# Parts [/api/v2/parts/assigned-to/{?ticketId}]
+
+###  Закрепленные на менеджера [GET]
+
++ Parameters
+    + ticketId: (required, number) - Id заявки
+
++ Response 200 (application/json)
+    + Attributes (array[AssignedPart])
+
+
+
+
+# Data Structure
+
+# PartGeneral (object)
+  + id: 17723 (number)
+  + ticketId: 359164 (number)
+  + needPartId: 26291 (number)
+  + vendorId: 1 (number)
+  + name: Блок питания банкомата Power supply 24/48v (string)
+  + number: 2345 (string)
+  + substitution: null (number)
+  + blockNumber: null (number)
+  + quantity: 1 (number)
+  + commonFieldString: null (number)
+  + commonField2String: null (number)
+  + commonFieldText: null (number)
+  + commonTimeStamp: null (number)
+  + customerId: null (number)
+  + customer: null (number)
+  + vender (Vendor)
+
+# PartNeed (object)
+  + id: 26291 (number)
+  + ticketId: 359065 (number)
+  + userId: 228 (number)
+  + statusId: 3 (number)
+  + name: Блок питания банкомата Power supply 24/48v (string)
+  + number: 12345 (number)
+  + quantity: 1 (number)
+  + unitId: 21 (number)
+  + appendTime: 2017-0328T100428.000Z (date)
+  + unit (Unit)
+  + currentStatus (CurrentStatus)
+
+# PartsInstalled (object)
+  + id: 998 (number)
+  + type: 0 (number)
+  + needPartId: 0 (number)
+  + ticketId: 38087 (number)
+  + userId: null (number)
+  + name: вертикальные ремни - по накладной 12.02.2010 (string)
+  + number: 49204013000E Belt, TMG, M (string)
+  + quantity: 3 (number)
+  + unitId: null (number)
+  + appendTime: 0000-00-00 00:00:00 (date)
+  + comment: null (number)
+  + need_part_id: 0 (number)
+  + perm: (Permission)
+  + user: 228 (number)
+  + unit: 33 (number)
+
+# Vendor (object)
+  + id: 1 (number)
+  + name: Diebold (string)
+
+# CurrentStatus (object)
+  + id: 3 (number)
+  + name: Отменено (string)
+  + next: (array)
+
+# Device (object)
+  + id: 1 (number)
+  + name: BNA (string)
+
+# Unit (object)
+  + id: 33 (number)
+  + name: ENA в сборе (string)
+
+# Permission (object)
+  + edit: 0 (number)
+  + delete: (number)
+
+# AssignedPart (object)
+  + id: 26 (number)
+  + username: Абдрахманов Талгат  Аронович (string)
+  + partname: 49219660000B ASSY PWR CNTRL BOX (string)
+  + quantity: 1 (number)
+  + name: ASSY PWR CNTRL BOX (string)
+  + number: 49219660000B (string)
+  + parsedate: 2017-05-24T17:10:07.000Z (date)

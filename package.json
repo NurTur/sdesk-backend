@@ -1,0 +1,50 @@
+{
+  "name": "sdesk-backend",
+  "version": "0.0.1",
+  "description": "Backend of Sdesk",
+  "date": "28/02/2017",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "./node_modules/.bin/nodemon bin/dev"
+  },
+  "author": "Sultan Arziev",
+  "license": "ISC",
+  "config": {
+    "port": "5015"
+  },
+  "path": {
+    "$home": "/",
+    "$configs": "/configs",
+    "$db-v1": "/api/v1/database",
+    "$db-v2": "/api/v2/database",
+    "$api-v2": "/api/v2",
+    "$misc": "/misc"
+  },
+  "dependencies": {
+    "aglio": "^2.3.0",
+    "date-fns": "^1.28.5",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^2.0.1",
+    "koa-passport": "^3.0.0",
+    "koa-router": "^7.0.0",
+    "koa-session": "^5.1.0",
+    "koa-static": "^3.0.0",
+    "koa-useragent": "^1.0.0",
+    "log4js": "^1.0.1",
+    "moment": "^2.18.1",
+    "mysql": "^2.13.0",
+    "request": "^2.81.0",
+    "sequelize": "^3.30.4",
+    "sexy-require": "^0.1.0"
+  },
+  "devDependencies": {
+    "debug": "^2.2.0",
+    "eslint": "^3.15.0",
+    "eslint-plugin-async-await": "0.0.0",
+    "eslint-plugin-react": "^6.9.0",
+    "nodemon": "^1.8.1"
+  }
+}
